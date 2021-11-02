@@ -4,10 +4,9 @@
   <asx:values>
    <PROGDIR>
     <NAME>YSALV_TEMPLATE_EXAMPLE</NAME>
-    <DBAPL>S</DBAPL>
     <SUBC>1</SUBC>
+    <RLOAD>E</RLOAD>
     <FIXPT>X</FIXPT>
-    <LDBNAME>D$S</LDBNAME>
     <UCCHECK>X</UCCHECK>
    </PROGDIR>
    <CUA>
@@ -479,17 +478,13 @@
       <CODE>DEL</CODE>
       <TEXTNO>001</TEXTNO>
       <TEXT_TYPE>S</TEXT_TYPE>
-      <TEXT_NAME>ICON_ERASE</TEXT_NAME>
-      <ICON_ID>@TS@</ICON_ID>
-      <FUN_TEXT>Del</FUN_TEXT>
+      <FUN_TEXT>DEL</FUN_TEXT>
      </RSMPE_FUNT>
      <RSMPE_FUNT>
       <CODE>GEL</CODE>
       <TEXTNO>001</TEXTNO>
       <TEXT_TYPE>S</TEXT_TYPE>
-      <TEXT_NAME>ICON_SYSTEM_MARK</TEXT_NAME>
-      <ICON_ID>@2X@</ICON_ID>
-      <FUN_TEXT>Gel</FUN_TEXT>
+      <FUN_TEXT>GEL</FUN_TEXT>
      </RSMPE_FUNT>
      <RSMPE_FUNT>
       <CODE>P+</CODE>
@@ -519,9 +514,7 @@
       <CODE>SAVE</CODE>
       <TEXTNO>001</TEXTNO>
       <TEXT_TYPE>S</TEXT_TYPE>
-      <TEXT_NAME>ICON_SYSTEM_SAVE</TEXT_NAME>
-      <ICON_ID>@2L@</ICON_ID>
-      <FUN_TEXT>Save</FUN_TEXT>
+      <FUN_TEXT>SAVE</FUN_TEXT>
      </RSMPE_FUNT>
     </FUN>
     <MEN>
@@ -1191,19 +1184,19 @@
       <PFK_CODE>000001</PFK_CODE>
       <CODE>0001</CODE>
       <NO>33</NO>
-      <PFNO>36</PFNO>
-     </RSMPE_BUT>
-     <RSMPE_BUT>
-      <PFK_CODE>000001</PFK_CODE>
-      <CODE>0001</CODE>
-      <NO>34</NO>
       <PFNO>16</PFNO>
      </RSMPE_BUT>
      <RSMPE_BUT>
       <PFK_CODE>000001</PFK_CODE>
       <CODE>0001</CODE>
+      <NO>34</NO>
+      <PFNO>14</PFNO>
+     </RSMPE_BUT>
+     <RSMPE_BUT>
+      <PFK_CODE>000001</PFK_CODE>
+      <CODE>0001</CODE>
       <NO>35</NO>
-      <PFNO>38</PFNO>
+      <PFNO>13</PFNO>
      </RSMPE_BUT>
     </BUT>
     <PFK>
@@ -1253,6 +1246,18 @@
       <CODE>000001</CODE>
       <PFNO>12</PFNO>
       <FUNCODE>&amp;F12</FUNCODE>
+      <FUNNO>001</FUNNO>
+     </RSMPE_PFK>
+     <RSMPE_PFK>
+      <CODE>000001</CODE>
+      <PFNO>13</PFNO>
+      <FUNCODE>SAVE</FUNCODE>
+      <FUNNO>001</FUNNO>
+     </RSMPE_PFK>
+     <RSMPE_PFK>
+      <CODE>000001</CODE>
+      <PFNO>14</PFNO>
+      <FUNCODE>GEL</FUNCODE>
       <FUNNO>001</FUNNO>
      </RSMPE_PFK>
      <RSMPE_PFK>
@@ -1371,20 +1376,8 @@
      </RSMPE_PFK>
      <RSMPE_PFK>
       <CODE>000001</CODE>
-      <PFNO>36</PFNO>
-      <FUNCODE>GEL</FUNCODE>
-      <FUNNO>001</FUNNO>
-     </RSMPE_PFK>
-     <RSMPE_PFK>
-      <CODE>000001</CODE>
       <PFNO>37</PFNO>
       <FUNCODE>&amp;EB9</FUNCODE>
-      <FUNNO>001</FUNNO>
-     </RSMPE_PFK>
-     <RSMPE_PFK>
-      <CODE>000001</CODE>
-      <PFNO>38</PFNO>
-      <FUNCODE>SAVE</FUNCODE>
       <FUNNO>001</FUNNO>
      </RSMPE_PFK>
      <RSMPE_PFK>
@@ -1940,12 +1933,6 @@
      <ID>R</ID>
      <ENTRY>salv template example</ENTRY>
      <LENGTH>21</LENGTH>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>P_LAYOUT</KEY>
-     <ENTRY>@LZ@ Layout</ENTRY>
-     <LENGTH>19</LENGTH>
     </item>
    </TPOOL>
   </asx:values>

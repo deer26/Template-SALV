@@ -4,18 +4,15 @@
   <asx:values>
    <PROGDIR>
     <NAME>YSALV_TEMPLATE_EXAMPLE_SCR</NAME>
-    <DBAPL>S</DBAPL>
-    <DBNA>D$</DBNA>
     <SUBC>I</SUBC>
-    <FIXPT>X</FIXPT>
-    <LDBNAME>D$S</LDBNAME>
+    <RLOAD>E</RLOAD>
     <UCCHECK>X</UCCHECK>
    </PROGDIR>
    <TPOOL>
     <item>
      <ID>R</ID>
-     <ENTRY>ysalv template example selection screen include</ENTRY>
-     <LENGTH>47</LENGTH>
+     <ENTRY>Include YSALV_TEMPLATE_EXAMPLE_SCR</ENTRY>
+     <LENGTH>34</LENGTH>
     </item>
    </TPOOL>
   </asx:values>

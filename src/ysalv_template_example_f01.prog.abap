@@ -55,50 +55,50 @@ FORM set_data.
 
   sy-title = 'Kartal goool gool'.
 
-  CREATE OBJECT gr_salv.
+  CREATE OBJECT go_salv.
 
-  gr_salv->factory(
+  go_salv->factory(
     EXPORTING
-      iv_delete_columns      = 'MANDT,SEATSMAX_F,SEATSOCC_F'
-      iv_hotspot_columns     = 'CARRID,ICON'
-      iv_hide_buttons        = 'DEL,GEL'
-      iv_pfstatus            = 'STAT' " create status with name stat and put DEL,GEL,SAVe
-      iv_aggregation_columns = 'SEATSMAX_B,SEATSOCC_B'
-      iv_sort_columns        = 'CARRID,CONNID'
-      iv_layout              = p_layout
-      iv_color_column        = 'COLOR'
-      iv_form_prog           = sy-repid
+      if_delete_columns      = 'MANDT,SEATSMAX_F,SEATSOCC_F'
+      if_hotspot_columns     = 'CARRID,ICON'
+      if_hide_buttons        = 'DEL,GEL'
+      if_pfstatus            = 'STAT' " create status with name stat and put DEL,GEL,SAVe
+      if_aggregation_columns = 'SEATSMAX_B,SEATSOCC_B'
+      if_sort_columns        = 'CARRID,CONNID'
+      if_layout              = p_layout
+      if_color_column        = 'COLOR'
+      if_form_prog           = sy-repid
     CHANGING
       ct_table               = gt_tab[] ).
 
 
-  gr_salv->delete_column( iv_columnname = 'SEATSOCC' ).
+  go_salv->delete_column( if_columnname = 'SEATSOCC' ).
 
-  gr_salv->set_column_color( iv_columnname = 'PRICE' iv_color = col_positive ).
+  go_salv->set_column_color( if_columnname = 'PRICE' if_color = col_positive ).
 
-  gr_salv->edit_column(
-    iv_columname   = 'ICON'
-    iv_long_text   = 'Uçuşlar'
-    iv_medium_text = 'Uçuşlar'
-    iv_short_text  = 'Uçuşlar'
-    iv_sign        = if_salv_c_bool_sap=>true
-    iv_zero        = if_salv_c_bool_sap=>false
+  go_salv->edit_column(
+    if_columname   = 'ICON'
+    if_long_text   = 'Uçuşlar'
+    if_medium_text = 'Uçuşlar'
+    if_short_text  = 'Uçuşlar'
+    if_sign        = if_salv_c_bool_sap=>true
+    if_zero        = if_salv_c_bool_sap=>false
   ).
-  gr_salv->edit_column(
-    iv_columname   = 'STATU'
-    iv_long_text   = 'Statu'
-    iv_medium_text = 'Statu'
-    iv_short_text  = 'Statu'
-    iv_sign        = if_salv_c_bool_sap=>true
-    iv_zero        = if_salv_c_bool_sap=>false
+  go_salv->edit_column(
+    if_columname   = 'STATU'
+    if_long_text   = 'Statu'
+    if_medium_text = 'Statu'
+    if_short_text  = 'Statu'
+    if_sign        = if_salv_c_bool_sap=>true
+    if_zero        = if_salv_c_bool_sap=>false
   ).
-  gr_salv->create_header(
-    iv_header_text = |Öylesine bir rapor({ lines( gt_tab ) })|
-    iv_action_text = 'BioNTech SE'
-    iv_logo        = 'LOGO'
-    iv_footer_text = 'BioNTech SE' ).
+  go_salv->create_header(
+    if_header_text = |Öylesine bir rapor({ lines( gt_tab ) })|
+    if_action_text = 'BioNTech SE'
+    if_logo        = 'LOGO'
+    if_footer_text = 'BioNTech SE' ).
 
-  gr_salv->display( ) .
+  go_salv->display( ) .
 
 ENDFORM.
 FORM salv_on_user_command USING pr_salv_table TYPE REF TO cl_salv_table
@@ -109,22 +109,22 @@ FORM salv_on_user_command USING pr_salv_table TYPE REF TO cl_salv_table
 
   CASE pv_salv_function .
     WHEN 'SAVE' .
-      gr_salv->hide_button( 'SAVE' ).
-      gr_salv->show_button( 'DEL' ).
-      gr_salv->show_button( 'GEL' ).
-      gr_salv->refresh( ).
+      go_salv->hide_button( 'SAVE' ).
+      go_salv->show_button( 'DEL' ).
+      go_salv->show_button( 'GEL' ).
+      go_salv->refresh( ).
     WHEN 'DEL' .
-      gr_salv->hide_button( 'DEL' ).
-      gr_salv->show_button( 'SAVE' ).
+      go_salv->hide_button( 'DEL' ).
+      go_salv->show_button( 'SAVE' ).
       DELETE gt_tab WHERE carrid = 'AA'.
-      gr_salv->create_header( iv_header_text = |Öylesine bir rapor({ lines( gt_tab ) })|
-                              iv_action_text = 'Biontech Se'
-                              iv_logo        = 'LOGO' ).
-      gr_salv->refresh( ).
+      go_salv->create_header( if_header_text = |Öylesine bir rapor({ lines( gt_tab ) })|
+                              if_action_text = 'Biontech Se'
+                              if_logo        = 'LOGO' ).
+      go_salv->refresh( ).
     WHEN 'GEL' .
-      gr_salv->hide_button( 'DEL' ).
-      gr_salv->hide_button( 'SAVE' ).
-      gr_salv->hide_button( 'GEL' ).
+      go_salv->hide_button( 'DEL' ).
+      go_salv->hide_button( 'SAVE' ).
+      go_salv->hide_button( 'GEL' ).
     WHEN 'SU01'.
 
       CALL TRANSACTION 'SU01' AND SKIP FIRST SCREEN.
@@ -140,15 +140,15 @@ FORM salv_on_link_click USING pr_salv_table TYPE REF TO cl_salv_table
     IF sy-subrc EQ 0.
       SELECT * FROM scarr INTO TABLE @DATA(lt_tab) WHERE carrid EQ @ls_tab-carrid.
       IF sy-subrc EQ 0.
-        DATA(lo_salv) = NEW ycl_hk_salv_template( ).
+        DATA(lo_salv) = NEW zcl_hk_salv_template( ).
         lo_salv->factory(
           EXPORTING
-            iv_title          = 'SCARR Table'
-            iv_hide_buttons   = 'DEL,GEL,SAVE'
-            iv_pfstatus       = 'STAT'
-            iv_delete_columns = 'MANDT'
-            iv_popup_type     = '100'
-            iv_form_prog      = sy-repid
+            if_title          = 'SCARR Table'
+            if_hide_buttons   = 'DEL,GEL,SAVE'
+            if_pfstatus       = 'STAT'
+            if_delete_columns = 'MANDT'
+            if_popup_type     = '100'
+            if_form_prog      = sy-repid
           CHANGING
             ct_table          = lt_tab ).
         lo_salv->display( ) .
@@ -160,15 +160,15 @@ FORM salv_on_link_click USING pr_salv_table TYPE REF TO cl_salv_table
     IF sy-subrc EQ 0.
       SELECT * FROM spfli INTO TABLE @DATA(lt_spfli) WHERE carrid EQ @ls_tab-carrid AND connid EQ @ls_tab-connid.
       IF sy-subrc EQ 0.
-        DATA(lo_spfli) = NEW ycl_hk_salv_template( ).
+        DATA(lo_spfli) = NEW zcl_hk_salv_template( ).
         lo_spfli->factory(
           EXPORTING
-            iv_title          = 'SPFLI Table'
-            iv_delete_columns = 'MANDT'
-            iv_hide_buttons   = 'DEL,GEL,SAVE,SU01'
-            iv_pfstatus       = 'STAT'
-            iv_popup_type     = '200'
-            iv_form_prog      = sy-repid
+            if_title          = 'SPFLI Table'
+            if_delete_columns = 'MANDT'
+            if_hide_buttons   = 'DEL,GEL,SAVE,SU01'
+            if_pfstatus       = 'STAT'
+            if_popup_type     = '200'
+            if_form_prog      = sy-repid
           CHANGING
             ct_table          = lt_spfli ).
 
